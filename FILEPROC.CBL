@@ -18,7 +18,7 @@ FD OUTFILE.
 
 WORKING-STORAGE SECTION.
 01 WS-EOF PIC X VALUE 'N'.
-    88 END-OF-FILE VALUE 'Y'.
+   88 END-OF-FILE VALUE 'Y'.
 01 WS-RECORD-CNT PIC 9(5) VALUE 0.
 
 PROCEDURE DIVISION.
@@ -31,7 +31,9 @@ MAIN-PARA.
                 SET END-OF-FILE TO TRUE
             NOT AT END
                 ADD 1 TO WS-RECORD-CNT
-                MOVE IN-RECORD TO OUT-RECORD
+                STRING 'Processed: ' DELIMITED BY SIZE,
+                       IN-RECORD DELIMITED BY SIZE
+                    INTO OUT-RECORD
                 WRITE OUT-RECORD
         END-READ
     END-PERFORM
